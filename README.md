@@ -4,6 +4,8 @@ For my assessment I decided to use NodeJS express and vanilla JS for the front e
 
 Watch my demo video here: https://youtu.be/0cPYpncagfo
 
+Note: you can `node dbInit.js` to reset your cocktail database.
+
 ## Installation and Running Instructions
 
 ### API
