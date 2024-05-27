@@ -3,7 +3,6 @@ FROM node:18
 WORKDIR /app
 
 COPY . .
-RUN npm ci
+RUN npm install
 
-
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "build&Start"]
