@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Button, TextField, Slider } from '@mui/material'
 
-function Submission() {
+function Submission({ setUpdateRows, updateRows} : {updateRows: boolean, setUpdateRows : React.Dispatch<React.SetStateAction<boolean>>}) {
   const [name, setName] = useState<string>("");
   const [uselessFact, setUselessFact] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
@@ -25,7 +25,7 @@ function Submission() {
       if(result.status !== 200) {
         alert(`status code ${result.status}: ${(await getBody(result)).error}`)
       }
-
+      setUpdateRows(!updateRows);
     })();
   }
   async function getBody(result: Response) {

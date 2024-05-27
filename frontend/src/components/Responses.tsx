@@ -1,26 +1,36 @@
 import { useEffect, useState } from 'react';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
 
-function Responses() {
+function Responses({ updateRows } : 
+  {updateRows: boolean}) {
   const [rows, setRows] = useState<{name: string,
                                     uselessFact: string,
                                     postedDate: Date,
                                     rating: number,
                                     _id: string
                                     }[]>([]);
-
+                                    
   useEffect(() => {
-      fetch('http://localhost:4000/').then(resp => resp.json()).then(val => {
-        setRows(val);
-        console.log(val);
-      }).catch(() => {
-        alert("There was an issue with fetching the user generated useless facts.");
-      });
+    updateTable();
   }, []);
+
+  function updateTable() {
+    fetch('http://localhost:4000/').then(resp => resp.json()).then(val => {
+      setRows(val);
+      console.log(val);
+    }).catch(() => {
+      alert("There was an issue with fetching the user generated useless facts.");
+    });  
+
+  }
+  useEffect(() => {
+    updateTable();
+  }, [updateRows]);
 
   return <>
   <br/><br/>
   <br/><br/>
+  {/* This is mostly copied code from material ui, it just creates the table.*/}
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>

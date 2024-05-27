@@ -8,6 +8,7 @@ import Responses from './components/Responses';
 function App() {
   const [randomFact, setRandomFact] = useState<string>("");
   const [todayRandFactDisp, setTodayRandFactDisp] = useState<boolean>(true);
+  const [updateRows, setUpdateRows] = useState<boolean>(false); //whenever this is switched it will update the table
 
   //fetch todays useless fact
   useEffect(() => {
@@ -31,9 +32,9 @@ function App() {
       });
     }}>Another One?</Button>
 
-      <Submission />
+      <Submission setUpdateRows={setUpdateRows} updateRows={updateRows}/>
 
-      <Responses />
+      <Responses updateRows={updateRows}/>
     </>
   )
 }
