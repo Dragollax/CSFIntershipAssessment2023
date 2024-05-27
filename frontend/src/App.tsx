@@ -3,6 +3,7 @@ import './App.css'
 import { Button } from '@mui/material'
 import Submission from './components/Submittion';
 import Responses from './components/Responses';
+import SpecificFact from './components/SpecificFact';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 
       <Submission setUpdateRows={setUpdateRows} updateRows={updateRows}/>
 
+      <SpecificFact />
       <Responses updateRows={updateRows}/>
     </>
   )

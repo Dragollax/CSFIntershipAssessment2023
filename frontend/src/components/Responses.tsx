@@ -8,8 +8,7 @@ function Responses({ updateRows } :
                                     postedDate: Date,
                                     rating: number,
                                     _id: string
-                                    }[]>([]);
-                                    
+                                    }[]>([]);                        
   useEffect(() => {
     updateTable();
   }, []);
@@ -17,7 +16,6 @@ function Responses({ updateRows } :
   function updateTable() {
     fetch('http://localhost:4000/').then(resp => resp.json()).then(val => {
       setRows(val);
-      console.log(val);
     }).catch(() => {
       alert("There was an issue with fetching the user generated useless facts.");
     });  
@@ -39,6 +37,7 @@ function Responses({ updateRows } :
           <TableCell align="right">rating</TableCell>
           <TableCell align="right">Poster's Name</TableCell>
           <TableCell align="right">Posted Date</TableCell>
+          <TableCell align="right">ID</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -53,6 +52,7 @@ function Responses({ updateRows } :
             <TableCell align="right">{row.rating * 100 + "%"}</TableCell>
             <TableCell align="right">{row.name}</TableCell>
             <TableCell align="right">{new Date(row.postedDate).toString()}</TableCell>
+            <TableCell align="right">{row._id}</TableCell>
           </TableRow>
         ))}
       </TableBody>
