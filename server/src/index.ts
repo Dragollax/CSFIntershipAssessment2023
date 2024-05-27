@@ -24,29 +24,20 @@ const uselessFactSchema = new mongoose.Schema({
 });
 const uselessFacts = mongoose.model("uselessFacts", uselessFactSchema);
 
-
+//add routes
 export const router: Router = express.Router();
 router.use(express.json());
 
 router.post('/', async (req, res) => {
   let {name, uselessFact, rating} = req.body;
 
-  if(name == undefined || name === null || 
-    (typeof name !== 'string' && !(name instanceof String))  || 
-    name.length  <= 0) {
-      return res.status(400).json({error: "Please enter a name."});
-    }
-  if(name.length >= charLimit) {
-    return res.status(400).json({error: `Please enter a name that is less than ${charLimit} characters.`});
-  }
-  if(uselessFact == undefined || uselessFact === null || 
-    (typeof uselessFact !== 'string' && !(uselessFact instanceof String))  || 
-    uselessFact.length  <= 0) {
-      return res.status(400).json({error: "Please enter a useless fact."});
-    }
-  if(name.length >= charLimit) {
-    return res.status(400).json({error: `please enter a useless fact that is less than ${charLimit} characters.`});
-  }
+  if(!validStr(name)  || name.length  <= 0) return res.status(400).json({error: "Please enter a name."});
+  if(name.length >= charLimit) return res.status(400).json({error: `Please enter a name that is less than ${charLimit} characters.`});
+
+  if(! validStr(uselessFact)  || uselessFact.length  <= 0) return res.status(400).json({error: "Please enter a useless fact."});
+  
+  if(name.length >= charLimit) return res.status(400).json({error: `please enter a useless fact that is less than ${charLimit} characters.`});
+  
   if(typeof rating !== 'number' || rating < 0 || rating > 1) {
     return res.status(400).json({error: 'please enter a rating that is number and is greater than or equal to 0 and less than or equal to 1.'})
   }
@@ -90,7 +81,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   let id = req.params.id;
   
-  if(id.length !== 24) {
+  if(id.length !== 24) {//id length is fixed in mongodb
     return res.status(400).json({error: "invalid id"});
   } 
 
@@ -108,9 +99,11 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-function checkStr(val: any) {
-  return !(val == undefined || val === null || (typeof val !== 'string' && !(val instanceof String)));
-}
-
 app.use('/', router);
 app.listen(port, () => console.log("Server Started on " + port));
+
+
+//helper functions
+function validStr(val: any) {
+  return !(val == undefined || val === null || (typeof val !== 'string' && !(val instanceof String)));
+}
