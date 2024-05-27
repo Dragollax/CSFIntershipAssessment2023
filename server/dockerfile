@@ -3,7 +3,8 @@ FROM node:18
 WORKDIR /app
 
 COPY . .
-RUN npm install\ 
-  && npm install typescript -g && npm install tsc
+RUN npm install 
+RUN npm install typescript -g
+RUN npm install tsc --save-dev
 
-CMD ["npm", "run", "build&Start"]
+CMD ["npm", "run", "start"]
