@@ -1,3 +1,6 @@
+#additional stuff to ignore
+.DS_Store
+
 # Logs
 logs
 *.log
