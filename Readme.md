@@ -3,7 +3,7 @@
 2. Clone the repo locally.
 3. Navigate to the root folder of the repo.
 4. run """docker compose up""".
-5. wait ~20s at most, and navigate to your browser to localhost:5173.
+5. wait a couple of minutes then navigate to your browser to localhost:5173.
 
 If the database folder at the root of the repo doesn't exist or is empty then create it calling the folder "database", then run """docker compose up""", then navigate to localhost:8081 and create a database called CSF_Takehome. Now just navigate to localhost:5173 and it should work.
 
