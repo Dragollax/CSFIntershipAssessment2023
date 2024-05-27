@@ -62,7 +62,7 @@ function Submission({ setUpdateRows, updateRows} : {updateRows: boolean, setUpda
       />
 
     <p>rating: </p>
-    <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" onChange={(event, value) => {
+    <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" onChange={(_event, value) => {
       if(typeof value === 'number') {
         setRating(value / 100);
       }
