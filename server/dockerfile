@@ -3,7 +3,7 @@ FROM node:18
 WORKDIR /app
 
 COPY . .
-RUN npm install
-RUN npm install typescript --save-dev
+RUN npm install\ 
+  && npm install typescript -g
 
 CMD ["npm", "run", "build&Start"]
