@@ -1,30 +1,32 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Button, TextField } from '@mui/material'
+import { Button } from '@mui/material'
+import Submission from './components/Submittion';
+
 
 function App() {
-  const [todaysFact, setTodaysFact] = useState<string>("");
+  const [randomFact, setRandomFact] = useState<string>("");
+  const [todayRandFactDisp, setTodayRandFactDisp] = useState<boolean>(true);
 
+  //fetch todays useless fact
   useEffect(() => {
-    (async () => {
-      let resp = await fetch("https://uselessfacts.jsph.pl/api/v2/facts/today");
-      resp = await resp.json();
-      //@ts-ignore
-      setTodaysFact(resp.text);
-    })();
+      fetch("https://uselessfacts.jsph.pl/api/v2/facts/today").then((resp) => resp.json()).then(val => {
+        setRandomFact(val.text);
+      });
   }, []);
-
+  
   return (
     <>
-    <p>Todays useless fact: {todaysFact}</p>
-    <TextField
-          id="outlined-textarea"
-          label="add a useless fact here"
-          placeholder="Placeholder"
-          multiline
-          style={{width: "100%"}}
-        />
-    <Button variant="contained">Submit</Button>
+    {/* this first displays todays useless fact and then each time the button is clicked it will display a random one. */}
+    <p>{todayRandFactDisp ? "Today's Random Fact" : "A Random Fact"}: {randomFact}</p> 
+    <Button variant="contained" onClick={() => {
+      fetch("https://uselessfacts.jsph.pl/api/v2/facts/random").then((resp) => resp.json()).then((val) => {
+        setRandomFact(val.text);
+        setTodayRandFactDisp(false);
+      });
+    }}>Another One?</Button>
+
+      <Submission />
     </>
   )
 }
