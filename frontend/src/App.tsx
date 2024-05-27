@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Button } from '@mui/material'
 import Submission from './components/Submittion';
+import Responses from './components/Responses';
 
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
   useEffect(() => {
       fetch("https://uselessfacts.jsph.pl/api/v2/facts/today").then((resp) => resp.json()).then(val => {
         setRandomFact(val.text);
+      }).catch(() => {
+        alert("There was an issue with fetching todays useless fact.");
       });
   }, []);
   
@@ -23,10 +26,14 @@ function App() {
       fetch("https://uselessfacts.jsph.pl/api/v2/facts/random").then((resp) => resp.json()).then((val) => {
         setRandomFact(val.text);
         setTodayRandFactDisp(false);
+      }).catch(() => {
+        alert("There was an issue with fetching another useless fact.");
       });
     }}>Another One?</Button>
 
       <Submission />
+
+      <Responses />
     </>
   )
 }
