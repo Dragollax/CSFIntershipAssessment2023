@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY . .
 RUN npm install
-RUN npm install typescript
+RUN npm install typescript -g
 
 CMD ["npm", "run", "build&Start"]
