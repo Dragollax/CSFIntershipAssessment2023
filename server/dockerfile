@@ -3,9 +3,10 @@ FROM node:18
 WORKDIR /app
 
 COPY . .
-RUN npm install 
 RUN npm install typescript -g
-RUN npm install tsc
+RUN npm install tsc -g
+RUN npm install 
+
 RUN mkdir dist
 
 CMD ["npm", "run", "build&Start"]
