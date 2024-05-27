@@ -8,4 +8,4 @@ RUN npm install typescript -g
 RUN npm install tsc --save-dev
 RUN mkdir dist
 
-CMD ["npm", "run", "build&start"]
+CMD ["npm", "run", "build&Start"]
