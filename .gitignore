@@ -1,6 +1,6 @@
 #additional stuff to ignore
 .DS_Store
-
+server/dist
 # Logs
 logs
 *.log
