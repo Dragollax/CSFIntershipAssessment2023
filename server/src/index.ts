@@ -61,6 +61,56 @@ router.post('/', async (req, res) => {
   return res.status(200).send();
 });
 
+router.get('/', async (req, res) => {
+  let output: any[] = [];
+
+  try{
+    let databaseContents = await uselessFacts.find({}).select("name")
+                                .select("_id").select("uselessFact")
+                                .select("postedDate").select("rating");
+
+    databaseContents.forEach((val) => {
+      output.push({
+        _id: val._id.valueOf().toString(),
+        uselessFact: val.uselessFact,
+        postedDate: val.postedDate,
+        rating: val.rating
+      });
+    });
+
+  } catch(e) {
+    console.log(e);
+    return res.status(500).send();
+  }
+  
+
+  return res.status(200).json(output);
+});
+
+router.get('/:id', async (req, res) => {
+  let id = req.params.id;
+  
+  if(id.length !== 24) {
+    return res.status(400).json({error: "invalid id"});
+  } 
+
+  try {
+    let databaseContents = await uselessFacts.findById(id).select("name")
+                                .select("_id").select("uselessFact")
+                                .select("postedDate").select("rating").limit(1);
+
+    if(databaseContents === null || databaseContents === undefined) return res.status(404).send();
+
+    return res.status(200).json(databaseContents);
+  } catch(e) {
+    console.log(e);
+    return res.status(500).send();
+  }
+})
+
+function checkStr(val: any) {
+  return !(val == undefined || val === null || (typeof val !== 'string' && !(val instanceof String)));
+}
 
 app.use('/', router);
 app.listen(port, () => console.log("Server Started on " + port));
