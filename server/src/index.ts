@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
   if(!validStr(name)  || name.length  <= 0) return res.status(400).json({error: "Please enter a name."});
   if(name.length >= charLimit) return res.status(400).json({error: `Please enter a name that is less than ${charLimit} characters.`});
 
-  if(! validStr(uselessFact)  || uselessFact.length  <= 0) return res.status(400).json({error: "Please enter a useless fact."});
+  if(!validStr(uselessFact)  || uselessFact.length  <= 0) return res.status(400).json({error: "Please enter a useless fact."});
   
   if(name.length >= charLimit) return res.status(400).json({error: `please enter a useless fact that is less than ${charLimit} characters.`});
   
@@ -65,7 +65,8 @@ router.get('/', async (req, res) => {
         _id: val._id.valueOf().toString(),
         uselessFact: val.uselessFact,
         postedDate: val.postedDate,
-        rating: val.rating
+        rating: val.rating,
+        name: val.name
       });
     });
 

@@ -10,7 +10,7 @@ function Submission() {
   function submitFact() {
     //this is so I can use async await, this function is immediatly executed
     (async () => {
-      let result = await fetch("http://server:4000/", {
+      let result = await fetch("http://localhost:4000/", {
         method: 'POST',
         headers: {
           'Content-Type' : 'application/json'
