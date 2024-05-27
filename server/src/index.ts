@@ -14,7 +14,9 @@ router.get('/', async (req, res) => {
   return res.status(200).json({message: "test"});
 });
 
-
+router.get('/something', async (req, res) => {
+  return res.status(200).json({message: "test somethign else."});
+});
 
 
 app.use('/', router);
