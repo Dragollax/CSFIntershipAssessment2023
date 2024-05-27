@@ -5,7 +5,7 @@ import { Button, TextField, Slider } from '@mui/material'
 function Submission({ setUpdateRows, updateRows} : {updateRows: boolean, setUpdateRows : React.Dispatch<React.SetStateAction<boolean>>}) {
   const [name, setName] = useState<string>("");
   const [uselessFact, setUselessFact] = useState<string>("");
-  const [rating, setRating] = useState<number>(0);
+  const [rating, setRating] = useState<number>(0.5);
 
   function submitFact() {
     //this is so I can use async await, this function is immediatly executed
@@ -62,7 +62,7 @@ function Submission({ setUpdateRows, updateRows} : {updateRows: boolean, setUpda
       />
 
     <p>rating: </p>
-    <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" onChange={(_event, value) => {
+    <Slider defaultValue={rating * 100} aria-label="Default" valueLabelDisplay="auto" onChange={(_event, value) => {
       if(typeof value === 'number') {
         setRating(value / 100);
       }
